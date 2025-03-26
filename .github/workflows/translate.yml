@@ -3,8 +3,8 @@ name: Translate GitBook to French
 on:
   push:
     branches:
-      - nadine  # Trigger the workflow on every push to the main branch
-  workflow_dispatch: # Allow manual triggering
+      - nadine  # Trigger on push to main branch
+  workflow_dispatch: # Allow manual trigger
 
 jobs:
   translate:
@@ -29,7 +29,7 @@ jobs:
         for file in docs/*.md; do
           filename=$(basename "$file")
 
-          # Read and escape the Markdown content for JSON compatibility
+          # Escape the Markdown content for JSON compatibility
           content=$(jq -Rs . < "$file")
 
           echo "Translating $filename..."
@@ -61,7 +61,7 @@ jobs:
         git config --global user.name "github-actions[bot]"
         git config --global user.email "github-actions[bot]@users.noreply.github.com"
 
-        # Add and commit the translated files
+        # Use GITHUB_TOKEN for authentication
         git add translations/
         git commit -m "Add French translations"
-        git push
+        git push https://x-access-token:${{ secrets.GITHUB_TOKEN }}@github.com/${{ github.repository }}.git HEAD:main
