@@ -3,7 +3,7 @@ name: Translate GitBook to French
 on:
   push:
     branches:
-      - main  # Trigger the workflow on every push to the main branch
+      - nadine  # Trigger the workflow on every push to the main branch
   workflow_dispatch: # Allow manual triggering
 
 jobs:
