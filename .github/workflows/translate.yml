@@ -81,4 +81,5 @@ jobs:
           git push https://x-access-token:${{ secrets.GITHUB_TOKEN }}@github.com/${{ github.repository }}.git HEAD:nadine
         else
           echo "No changes to commit."
+        fi
 
