@@ -19,3 +19,4 @@
 ***
 
 * [User Manual](user-manual.md)
+* [User Manual (French)](translations/user-manual.md)
