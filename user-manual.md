@@ -109,3 +109,4 @@ GitBook's OpenAPI block is powered by [Scalar](https://scalar.com/), so you can 
 
 ## Screen recording
 
+{% embed url="https://files.gitbook.com/v0/b/gitbook-x-prod.appspot.com/o/spaces%2Fu6I9dF735yWwxuGnUgmk%2Fuploads%2FcvrrYKOPZrIaThASGzd7%2FVideo%20Project%202.mp4?alt=media&token=9d540fea-2cf0-4288-b8ed-cdde208c54dc" %}
