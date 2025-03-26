@@ -38,8 +38,8 @@ jobs:
           # Microsoft Translator API call
           echo '${{ secrets.TRANSLATOR_API_KEY }}'
           response=$(curl -s -X POST "https://api.cognitive.microsofttranslator.com/translate?api-version=3.0&to=fr" \
-              -H "Ocp-Apim-Subscription-Key: '${{ secrets.TRANSLATOR_API_KEY }}'" \
-              -H "Ocp-Apim-Subscription-Region: '${{ secrets.AZURE_REGION }}'" \
+              -H "Ocp-Apim-Subscription-Key: 3dhTgCWwXrD5t8trthMQPkx6JvyV2Ga87Q2SGZsJe1Qsi37eywtXJQQJ99BCACGhslBXJ3w3AAAbACOGIYpc" \
+              -H "Ocp-Apim-Subscription-Region: centralindia" \
               -H "Content-Type: application/json" \
               -d "[{\"Text\": \"$content\"}]")
 
