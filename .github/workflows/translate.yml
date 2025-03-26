@@ -64,4 +64,4 @@ jobs:
         # Use GITHUB_TOKEN for authentication
         git add translations/
         git commit -m "Add French translations"
-        git push https://x-access-token:${{ secrets.GITHUB_TOKEN }}@github.com/${{ github.repository }}.git HEAD:main
+        git push https://x-access-token:${{ secrets.GITHUB_TOKEN }}@github.com/${{ github.repository }}.git HEAD:nadine
