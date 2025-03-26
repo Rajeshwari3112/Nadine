@@ -1,10 +1,12 @@
-name: Translate GitBook to French
+name: Auto-Translate GitBook to French
 
 on:
   push:
     branches:
-      - nadine  # Trigger on push to main branch
-  workflow_dispatch: # Allow manual trigger
+      - nadine  # Trigger on push to the main branch
+    paths:
+      - 'docs/*.md'  # Trigger only on Markdown file changes
+  workflow_dispatch:  # Allow manual trigger
 
 jobs:
   translate:
@@ -26,6 +28,8 @@ jobs:
     - name: Translate Markdown files to French
       run: |
         mkdir -p translations
+        changed=false  # Flag to track if changes occurred
+
         for file in docs/*.md; do
           filename=$(basename "$file")
 
@@ -52,16 +56,29 @@ jobs:
           translated=$(echo "$response" | jq -r '.[0].translations[0].text')
 
           # Save the translated content
-          echo "$translated" > "translations/$filename"
-          echo "Translated $filename successfully"
+          translated_file="translations/$filename"
+
+          # Check if the content has changed
+          if [ -f "$translated_file" ] && cmp -s <(echo "$translated") "$translated_file"; then
+            echo "No changes detected for $filename, skipping commit."
+          else
+            echo "$translated" > "$translated_file"
+            echo "Translated $filename successfully"
+            changed=true  # Mark as changed
+          fi
         done
 
     - name: Commit and Push Translations
+      if: ${{ success() }}  # Only commit if the previous step succeeds
       run: |
         git config --global user.name "github-actions[bot]"
         git config --global user.email "github-actions[bot]@users.noreply.github.com"
 
         # Use GITHUB_TOKEN for authentication
-        git add translations/
-        git commit -m "Add French translations"
-        git push https://x-access-token:${{ secrets.GITHUB_TOKEN }}@github.com/${{ github.repository }}.git HEAD:nadine
+        if [ "$changed" = true ]; then
+          git add translations/
+          git commit -m "Auto-update French translations"
+          git push https://x-access-token:${{ secrets.GITHUB_TOKEN }}@github.com/${{ github.repository }}.git HEAD:nadine
+        else
+          echo "No changes to commit."
+
