@@ -71,4 +71,4 @@ Le bloc OpenAPI de GitBook est alimenté par [Scalar](https://scalar.com/), vous
 
 { % embed url="https://files.gitbook.com/v0/b/gitbook-x-prod.appspot.com/o/spaces%2FsTzlaBJWdPGxSdf9x0bE%2Fuploads%2Fke5TfXoHK1oCbE26DFju%2FVideo%20Project%202.mp4?alt=media&token=e9ada5a6-2e1b-46a4-8aa8-708d1723def5 » %}
 
-
+{ % fichier src= ».gitbook/assets/Projet vidéo 2.mp4 » %}
