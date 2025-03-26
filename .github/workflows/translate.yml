@@ -35,9 +35,10 @@ jobs:
             continue
           fi
 
+          # Microsoft Translator API call
           response=$(curl -s -X POST "https://api.cognitive.microsofttranslator.com/translate?api-version=3.0&to=fr" \
-              -H "Ocp-Apim-Subscription-Key: ${{ secrets.TRANSLATOR_API_KEY }}" \
-              -H "Ocp-Apim-Subscription-Region: ${{ secrets.AZURE_REGION }}" \
+              -H "Ocp-Apim-Subscription-Key: '${{ secrets.TRANSLATOR_API_KEY }}'" \
+              -H "Ocp-Apim-Subscription-Region: '${{ secrets.AZURE_REGION }}'" \
               -H "Content-Type: application/json" \
               -d "[{\"Text\": \"$content\"}]")
 
@@ -50,10 +51,10 @@ jobs:
           fi
 
           translated=$(echo "$response" | jq -r '.[0].translations[0].text')
-
           echo "$translated" > "translations/$filename"
           echo "Translated $filename"
         done
+
     - name: Commit and Push Translations
       run: |
         git config --global user.name "github-actions[bot]"
