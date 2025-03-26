@@ -3,7 +3,7 @@ name: Translate GitBook to French
 on:
   push:
     branches:
-      - nadine  # Trigger the workflow on every push to the main branch
+      - main  # Trigger the workflow on every push to the main branch
   workflow_dispatch: # Allow manual triggering
 
 jobs:
@@ -28,32 +28,32 @@ jobs:
         mkdir -p translations
         for file in docs/*.md; do
           filename=$(basename "$file")
-          content=$(cat "$file")
 
-          if [[ -z "$content" ]]; then
-            echo "Warning: $file is empty. Skipping."
-            continue
-          fi
+          # Read and escape the Markdown content for JSON compatibility
+          content=$(jq -Rs . < "$file")
+
+          echo "Translating $filename..."
 
           # Microsoft Translator API call
-          echo '${{ secrets.TRANSLATOR_API_KEY }}'
           response=$(curl -s -X POST "https://api.cognitive.microsofttranslator.com/translate?api-version=3.0&to=fr" \
-              -H "Ocp-Apim-Subscription-Key: 3dhTgCWwXrD5t8trthMQPkx6JvyV2Ga87Q2SGZsJe1Qsi37eywtXJQQJ99BCACGhslBXJ3w3AAAbACOGIYpc" \
-              -H "Ocp-Apim-Subscription-Region: centralindia" \
+              -H "Ocp-Apim-Subscription-Key: ${{ secrets.TRANSLATOR_API_KEY }}" \
+              -H "Ocp-Apim-Subscription-Region: ${{ secrets.AZURE_REGION }}" \
               -H "Content-Type: application/json" \
-              -d "[{\"Text\": \"$content\"}]")
+              -d "[{\"Text\": $content}]")
 
-          echo "API Response: $response"
-
-          if echo "$response" | jq -e 'has("error")' > /dev/null; then
+          # Check for errors
+          if echo "$response" | jq -e '.error' > /dev/null; then
             echo "Error: API returned an error for $filename"
-            echo "$response" | jq '.error'
+            echo "$response"
             exit 1
           fi
 
+          # Extract translated text
           translated=$(echo "$response" | jq -r '.[0].translations[0].text')
+
+          # Save the translated content
           echo "$translated" > "translations/$filename"
-          echo "Translated $filename"
+          echo "Translated $filename successfully"
         done
 
     - name: Commit and Push Translations
