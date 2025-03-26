@@ -52,7 +52,7 @@ jobs:
           translated=$(echo "$response" | jq -r '.[0].translations[0].text')
 
           # Save the translated content
-          echo "$translated" > "translations/$filename"
+          echo "$translated" > "/$filename"
           echo "Translated $filename successfully"
         done
 
