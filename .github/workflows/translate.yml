@@ -30,21 +30,30 @@ jobs:
           filename=$(basename "$file")
           content=$(cat "$file")
 
-          # Microsoft Translator API call
+          if [[ -z "$content" ]]; then
+            echo "Warning: $file is empty. Skipping."
+            continue
+          fi
+
           response=$(curl -s -X POST "https://api.cognitive.microsofttranslator.com/translate?api-version=3.0&to=fr" \
               -H "Ocp-Apim-Subscription-Key: ${{ secrets.TRANSLATOR_API_KEY }}" \
               -H "Ocp-Apim-Subscription-Region: ${{ secrets.AZURE_REGION }}" \
               -H "Content-Type: application/json" \
-              -d "[{'Text': \"${content}\"}]")
+              -d "[{\"Text\": \"$content\"}]")
 
-          # Extract translated text
+          echo "API Response: $response"
+
+          if echo "$response" | jq -e 'has("error")' > /dev/null; then
+            echo "Error: API returned an error for $filename"
+            echo "$response" | jq '.error'
+            exit 1
+          fi
+
           translated=$(echo "$response" | jq -r '.[0].translations[0].text')
 
-          # Save the translated content
           echo "$translated" > "translations/$filename"
           echo "Translated $filename"
         done
-
     - name: Commit and Push Translations
       run: |
         git config --global user.name "github-actions[bot]"
