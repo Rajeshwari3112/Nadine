@@ -36,6 +36,7 @@ jobs:
           fi
 
           # Microsoft Translator API call
+          echo '${{ secrets.TRANSLATOR_API_KEY }}'
           response=$(curl -s -X POST "https://api.cognitive.microsofttranslator.com/translate?api-version=3.0&to=fr" \
               -H "Ocp-Apim-Subscription-Key: '${{ secrets.TRANSLATOR_API_KEY }}'" \
               -H "Ocp-Apim-Subscription-Region: '${{ secrets.AZURE_REGION }}'" \
