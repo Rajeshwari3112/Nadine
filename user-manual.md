@@ -134,4 +134,20 @@ The FCI Scenario Analysis module of the AMS evaluates various funding scenarios 
 ```
 
 ```markdown
+![Screen Labels](https://files.gitbook.com/v0/b/gitbook-x-prod.appspot.com/o/space/your-image-url.png)
+
+<details>
+  <summary>1 - Available Rate</summary>
+  <p>Cost database.</p>
+</details>
+
+<details>
+  <summary>2 - Number Of Assets</summary>
+  <p>Total number of all Facilities on a Site. Derived if more than one Facility on Site.</p>
+</details>
+
 ```
+
+```
+```
+
