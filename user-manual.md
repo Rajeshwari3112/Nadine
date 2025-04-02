@@ -120,35 +120,15 @@ The FCI Scenario Analysis module of the AMS evaluates various funding scenarios 
 <figure><img src=".gitbook/assets/image (1).png" alt=""><figcaption></figcaption></figure>
 
 ```markdown
-![Screen Labels](https://files.gitbook.com/v0/b/gitbook-x-prod.appspot.com/o/space/your-image-url.png)
-
+![System Architecture](https://files.gitbook.com/v0/b/gitbook-x-prod.appspot.com/o/space/your-image-url.pn)g)
 <details>
-  <summary>1 - Available Rate</summary>
-  <p>Cost database.</p>
+  <summary>Click here to see more details</summary>
+  
+  - **Description**: This image represents the system architecture.
+  - **Components**: Database, Backend, Frontend, API Gateway.
+  - **Workflow**: Requests go through the API Gateway, then reach the backend, which interacts with the database.
+  
 </details>
-
-<details>
-  <summary>2 - Number Of Assets</summary>
-  <p>Total number of all Facilities on a Site. Derived if more than one Facility on Site.</p>
-</details>
-```
-
-```markdown
-![Screen Labels](https://files.gitbook.com/v0/b/gitbook-x-prod.appspot.com/o/space/your-image-url.png)
-
-<details>
-  <summary>1 - Available Rate</summary>
-  <p>Cost database.</p>
-</details>
-
-<details>
-  <summary>2 - Number Of Assets</summary>
-  <p>Total number of all Facilities on a Site. Derived if more than one Facility on Site.</p>
-</details>
-
-```
-
-```
 ```
 
 <details>
