@@ -151,3 +151,13 @@ The FCI Scenario Analysis module of the AMS evaluates various funding scenarios 
 ```
 ```
 
+<details>
+
+<summary>"1 - Available Rate"</summary>
+
+!\[Screen Labels]\(https://files.gitbook.com/v0/b/gitbook-x-prod.appspot.com/o/space/your-image-url.png)
+
+**Cost database.**
+
+</details>
+
